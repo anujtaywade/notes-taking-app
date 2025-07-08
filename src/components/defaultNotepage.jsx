@@ -12,7 +12,7 @@ const DefaultNotepage = () => {
         <input
         className='w-4/5 h-4/5' 
         type="text"
-        placeholder='s'
+        placeholder='start typig here'
           />
      </div>
     </div>
