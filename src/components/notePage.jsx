@@ -1,13 +1,14 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 
 import {CirclePlus } from 'lucide-react'
 
 const NotePage = () => {
 
     let navigate = useNavigate()
-
+let location = useLocation();
+let note = location.state?.note
 let redirect = ()=>{
   navigate('/defaultNotepage')
 }
@@ -24,6 +25,8 @@ let redirect = ()=>{
           </button>
         </div>
       </div>
+
+      <p>{note || 'no note recieved'}</p>
     </div>
   )
 }

@@ -1,7 +1,16 @@
 import React from 'react'
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 
 const DefaultNotepage = () => {
+
+    let navigate= useNavigate()
+    let redirectTOnotePage =()=>{
+      navigate('/notePage',{state:{note}})
+    }
+
+  
+
   const [note, setnote] = useState(null);
 
   let handleChange =(e)=>{
@@ -15,14 +24,14 @@ const DefaultNotepage = () => {
     alert("your note is empty")
     return;
   }
-  
+  redirectTOnotePage()
   setnote('')
   }
 
  
 
   return (
-    <div className='bg-purple-200 min-h-screen'>
+    <div className='bg-purple-200 max-h-full'>
 
         
             <h1 className='text-4xl font-bold text-center pt-10 mb-5'>Notes Taking App</h1>
@@ -38,9 +47,12 @@ const DefaultNotepage = () => {
           />
      </div>
 
-     <div className=' flex items-start justify-center '>
+     <div className=' flex items-center justify-center absolute top-2/3 right-40 '>
       <button
-      onClick={handleDone} 
+      onClick={(e)=>{
+        handleDone(e)
+        redirectTOnotePage();
+      }} 
       className=' p-3 border border-black text-black '>
         Done
       </button>
