@@ -5,13 +5,13 @@ import {useNavigate} from 'react-router-dom';
 const DefaultNotepage = () => {
 
     let navigate= useNavigate()
+    
     let redirectTOnotePage =()=>{
       navigate('/notePage',{state:{note}})
     }
 
-  
 
-  const [note, setnote] = useState(null);
+  const [note, setnote] = useState('');
 
   let handleChange =(e)=>{
     setnote(e.target.value)
