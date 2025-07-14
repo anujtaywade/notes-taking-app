@@ -1,14 +1,31 @@
 
 import { useNavigate , useLocation } from "react-router-dom";
 import { CirclePlus} from "lucide-react";
+import { useState,useEffect, useRef } from 'react';
+
+
 
 
 const NotePage = () => {
+
+  const [note, setnote] = useState([]);
   let navigate = useNavigate();
 
   let location= useLocation();
-  let note = location.state?.note || []
-  console.log(note)
+  let hasaddnote= useRef(false);
+
+  
+  useEffect(() => {
+      let recievednote = location.state?.note || []
+    if(recievednote && !hasaddnote.current){
+      setnote((prev)=>[...prev,recievednote])
+      hasaddnote.current=true
+    }
+  }, [recievednote]);
+
+  let handleChange = (e)=>{
+    setnote(e.target.value)
+  }
 
   let redirect = () => {
     navigate("/defaultNotepage");
@@ -33,11 +50,11 @@ const NotePage = () => {
 
       <div>
         <div className="grid grid-cols-3 md:grid-cols-2">
-          {Array.isArray(note)&& note.map((item,index)=>{
-            <div className="text-3xl " key={index}>
+          {Array.isArray(note)&& note.map((item,index)=>(
+            <div onChange={handleChange} className="text-3xl " key={index}>
               the displayed note is:{item}
             </div>
-          })}
+          ))}
         </div>
       </div>
 
